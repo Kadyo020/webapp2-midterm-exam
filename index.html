@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice</title>
+</head>
+<body>
+    <header>
+        <h3>practice</h3>
+    </header>
+    <script>
+
+        // TASK 1
+        console.log("Statemaent 1")
+        console.log("Statemaent 2")
+        console.log("Statemaent 3")
+        console.log("Statemaent 4")
+        
+         // TASK 2
+        console.log("Statemaent 1")
+        console.log("Statemaent 2")
+        setTimeout(() =>{
+            console.log("callback function is fired")
+        }, 2000)
+        console.log("Statemaent 3")
+        console.log("Statemaent 4")
+        
+        //TASK 3
+        const request = new XMLHttpRequest('');
+        request.addEventListener('readystatechange', () =>{
+            if (request.readyState === 4){
+                console.log(request.readyState)
+            }
+        });
+        request.open('GET',"https://jsonplaceholder.typicode.com/todos");
+        request.send();
+        
+        //task 4
+        const  getTodos = (callback) => {
+            const request = new XMLhttprequest();
+            request.addEventListener('readysetchange', () => {
+                if (request.readyState === 4 && request.status === 200) {
+                   callback(undefined, request.responsetext)
+                }else if(request.readyState === 400){
+                    callback('could not fetch data', undefined)
+                }
+            });
+            request.open('GET',"https://jsonplaceholder.typicode.com/todos");
+            request.send();
+        }
+        getTodos((err, data) => {
+            if (err){
+                console.log(err);
+            }else {
+                console.log(data);
+            }
+        });
+    </script>
+</body>
+</html>
